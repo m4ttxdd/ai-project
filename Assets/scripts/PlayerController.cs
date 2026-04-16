@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             var mouseRay = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1)) 
+        if (Input.GetKeyDown(KeyCode.S)) 
         {
             mover.Stop();
         }
