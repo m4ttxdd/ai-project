@@ -28,7 +28,7 @@ public partial class AcquireThrowableCondition : Condition
             return false;
         }
 
-        LayerMask throwableMask = LayerMask.GetMask("Enemy");
+        LayerMask throwableMask = LayerMask.GetMask("Enemy", "Player");
         var hits = Physics.OverlapSphere(Agent.Value.transform.position, searchRadius, throwableMask);
         var bestDistance = float.MaxValue;
         Character best = null;
@@ -42,6 +42,11 @@ public partial class AcquireThrowableCondition : Condition
             }
 
             if (candidate.size >= agentCharacter.size)
+            {
+                continue;
+            }
+
+            if (candidate.thrower != null)
             {
                 continue;
             }
@@ -60,7 +65,14 @@ public partial class AcquireThrowableCondition : Condition
             }
         }
 
+        if(best == null)
+        {
+            Throwable.Value = null;
+            return false;
+        }
+
         Throwable.Value = best;
+        Throwable.Value.thrower = agentCharacter;
         return best != null;
     }
 

@@ -15,11 +15,15 @@ public class Mover : MonoBehaviour
 
     public void Move(Vector3 position)
     {
+        if (!agent.enabled) return;
+
         agent.SetDestination(position);
     }
 
     public void Stop()
     {
+        if (!agent.enabled) return;
+
         agent.SetDestination(transform.position);
     }
 }
