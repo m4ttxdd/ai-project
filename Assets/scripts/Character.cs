@@ -33,7 +33,8 @@ public class Character : MonoBehaviour
     protected virtual void Awake()
     {
         body = GetComponent<Rigidbody>();
-        agent = GetComponent<NavMeshAgent>();
+        TryGetComponent(out agent);
+
         groundMask = LayerMask.GetMask("Ground");
     }
 

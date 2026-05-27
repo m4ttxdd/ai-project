@@ -119,27 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &93455582 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 448604271733940441, guid: ffc16f1e6beac1a42a854694cbaa5e6a, type: 3}
-  m_PrefabInstance: {fileID: 3640231111112640733}
-  m_PrefabAsset: {fileID: 0}
---- !u!208 &93455589
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93455582}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,14 +927,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CannonEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 2745402785224971537, guid: ffc16f1e6beac1a42a854694cbaa5e6a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3650298299216111852, guid: ffc16f1e6beac1a42a854694cbaa5e6a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4785157541681632478, guid: ffc16f1e6beac1a42a854694cbaa5e6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.95
@@ -999,10 +970,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 448604271733940441, guid: ffc16f1e6beac1a42a854694cbaa5e6a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 93455589}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffc16f1e6beac1a42a854694cbaa5e6a, type: 3}
 --- !u!1001 &4844338858448833670
 PrefabInstance:
