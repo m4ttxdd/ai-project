@@ -21,7 +21,7 @@ public class Character : MonoBehaviour
     public float recoverDelay = 5f;
     public float groundCheckDistance = 0.5f;
 
-    [HideInInspector] public Character thrower;
+    public Character thrower;
 
     private Coroutine RecoverCoroutine;
     private Coroutine TickDeathCoroutine;

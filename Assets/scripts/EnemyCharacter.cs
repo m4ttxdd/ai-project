@@ -6,6 +6,8 @@ public class EnemyCharacter : Character
 {
     private static readonly List<EnemyCharacter> ActiveEnemies = new List<EnemyCharacter>();
 
+    public bool addToActiveEnemies = true;
+
     private BehaviorGraphAgent behaviorAgent;
 
     protected override void Awake()
@@ -15,7 +17,7 @@ public class EnemyCharacter : Character
 
     private void OnEnable()
     {
-        if (!ActiveEnemies.Contains(this))
+        if (addToActiveEnemies && !ActiveEnemies.Contains(this))
         {
             ActiveEnemies.Add(this);
         }

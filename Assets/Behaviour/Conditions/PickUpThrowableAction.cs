@@ -12,7 +12,6 @@ public partial class PickUpThrowableAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<Character> Throwable;
     [SerializeReference] public BlackboardVariable<Transform> HoldPoint;
-
     protected override Status OnStart()
     {
         if (Agent.Value == null || Throwable.Value == null || HoldPoint.Value == null) 

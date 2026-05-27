@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
 using Unity.Behavior;
 using Unity.Properties;
 using UnityEngine;
 
 [Serializable, Unity.Properties.GeneratePropertyBag]
-[Condition(name: "AcquireThrowable", story: "[Agent] acquires [Throwable]", category: "Conditions", id: "5602096bc86543e0a357dd7186651fa7")]
+[Condition(name: "AcquireThrowable", story: "[Agent] acquires [Throwable] from [LayerStrings]", category: "Conditions", id: "5602096bc86543e0a357dd7186651fa7")]
 public partial class AcquireThrowableCondition : Condition
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<Character> Throwable;
+    [SerializeReference] public BlackboardVariable<List<string>> LayerStrings;
 
     float searchRadius = 20f;
 
@@ -28,7 +30,7 @@ public partial class AcquireThrowableCondition : Condition
             return false;
         }
 
-        LayerMask throwableMask = LayerMask.GetMask("Enemy", "Player");
+        LayerMask throwableMask = LayerMask.GetMask(LayerStrings.Value.ToArray());
         var hits = Physics.OverlapSphere(Agent.Value.transform.position, searchRadius, throwableMask);
         var bestDistance = float.MaxValue;
         Character best = null;
