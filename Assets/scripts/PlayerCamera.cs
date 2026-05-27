@@ -6,16 +6,18 @@ public class PlayerCamera : MonoBehaviour
     public float smoothTime = 1f;
 
     private Vector3 velocity;
-    private float positionY;
+    private Vector3 initialPosition;
 
     private void Start()
     {
-        positionY = transform.position.y;
+        initialPosition = transform.position;
     }
 
     private void Update()
     {
-        var pos = Vector3.SmoothDamp(transform.position, player.position, ref velocity, Time.deltaTime * smoothTime);
-        transform.position = new Vector3 (pos.x, positionY, pos.z);
+
+        var targetPosition = new Vector3(player.position.x, player.position.y, player.position.z + initialPosition.z);
+        var pos = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, Time.deltaTime * smoothTime);
+        transform.position = new Vector3 (pos.x, initialPosition.y, pos.z);
     }
 }

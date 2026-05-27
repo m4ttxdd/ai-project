@@ -1,25 +1,42 @@
+using System.Collections.Generic;
 using Unity.Behavior;
 using UnityEngine;
 
 public class EnemyCharacter : Character
 {
+    private static readonly List<EnemyCharacter> ActiveEnemies = new List<EnemyCharacter>();
+
     private BehaviorGraphAgent behaviorAgent;
 
     protected override void Awake()
     {
         base.Awake();
-        
+    }
+
+    private void OnEnable()
+    {
+        if (!ActiveEnemies.Contains(this))
+        {
+            ActiveEnemies.Add(this);
+        }
+    }
+
+    private void OnDisable()
+    {
+        ActiveEnemies.Remove(this);
     }
 
     private void Start()
     {
-        
         behaviorAgent = GetComponent<BehaviorGraphAgent>();
         behaviorAgent.BlackboardReference.SetVariableValue("Player", PlayerCharacter.Instance);
     }
-    private void Update()
+
+    public bool TryGetSlot(out int index, out int count)
     {
-        //behaviorAgent.BlackboardReference.SetVariableValue("Player", GameObject.FindGameObjectWithTag("Player").GetComponent<Character>());
+        count = ActiveEnemies.Count;
+        index = ActiveEnemies.IndexOf(this);
+        return index >= 0 && count > 0;
     }
 
     public override void Die()
