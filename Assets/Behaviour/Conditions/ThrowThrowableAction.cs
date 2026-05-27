@@ -65,17 +65,53 @@ public partial class ThrowThrowableAction : Action
     {
         if (Target.Value != null)
         {
-            targetPosition = Target.Value.transform.position;
+            targetPosition = GetPredictedPosition(Target.Value);
             return true;
         }
 
         if (TryGetNearestEnemy(out var enemy))
         {
-            targetPosition = enemy.transform.position;
+            targetPosition = GetPredictedPosition(enemy);
             return true;
         }
 
         return TryGetRandomThrowPoint(origin, out targetPosition);
+    }
+
+    private Vector3 GetPredictedPosition(GameObject target)
+    {
+        var position = target.transform.position;
+
+        if (TryGetTargetVelocity(target, out var velocity))
+        {
+            position += velocity * flightTime;
+        }
+
+        return position;
+    }
+
+    private bool TryGetTargetVelocity(GameObject target, out Vector3 velocity)
+    {
+        velocity = Vector3.zero;
+
+        if (target == null)
+        {
+            return false;
+        }
+
+        if (target.TryGetComponent(out NavMeshAgent navAgent) && navAgent.enabled)
+        {
+            velocity = navAgent.velocity;
+            return true;
+        }
+
+        if (target.TryGetComponent(out Rigidbody body) && !body.isKinematic)
+        {
+            velocity = body.linearVelocity;
+            return true;
+        }
+
+        return false;
     }
 
     private bool TryGetNearestEnemy(out GameObject enemy)
