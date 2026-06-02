@@ -120,18 +120,28 @@ public partial class ThrowThrowableAction : Action
 
         var hits = Physics.OverlapSphere(Agent.Value.transform.position, enemySearchRadius, LayerMask.GetMask("Enemy"));
         var bestDistance = float.MaxValue;
+        var bestSize = int.MinValue;
 
         foreach (var hit in hits)
         {
-            var candidate = hit.GetComponentInParent<Character>().gameObject;
-            if (candidate == null || candidate == Agent.Value)
+            var enemyCharacter = hit.GetComponentInParent<EnemyCharacter>();
+            if (enemyCharacter == null || !enemyCharacter.addToActiveEnemies)
             {
                 continue;
             }
 
-            var distance = Vector3.Distance(Agent.Value.transform.position, candidate.transform.position);
-            if (distance < bestDistance)
+            var candidate = enemyCharacter.gameObject;
+            if (candidate == Agent.Value)
             {
+                continue;
+            }
+
+            var sizeValue = (int)enemyCharacter.size;
+            var distance = Vector3.Distance(Agent.Value.transform.position, candidate.transform.position);
+
+            if (sizeValue > bestSize || (sizeValue == bestSize && distance < bestDistance))
+            {
+                bestSize = sizeValue;
                 bestDistance = distance;
                 enemy = candidate;
             }
